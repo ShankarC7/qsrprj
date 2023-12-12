@@ -1,0 +1,33 @@
+{% include 'header.html' %} 
+
+{% block 'main' %}
+
+<h1 align='center'>User login info</h1>
+<p><a href="/home">home</a></p>
+<!--{{data}}
+{% for x in data %}
+    {{x}}<br>
+{% endfor %} -->
+<table border="1" align="center">
+    <tr>
+        <th>Sr.no</th>
+        <th>Username</th>
+        <th>session key</th>
+        <th>session cookies</th>
+        <th>session time</th>
+        
+    </tr>
+  
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td><a href='/viewpage/{{x.id}}'>{{auth_user.id}}</a></td>
+        <td>{{django_session.session_data}}</td>
+        <td>{{django_session.session_key}}</td>
+        <td>{{django_session.expire_date}}</td>
+        
+    </tr>
+   
+
+{% endblock 'main' %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+
+{% load static %}
+
+    
+    {% for x in data %}
+    {% if forloop.counter == 1 %}
+          <center><div class="col-3 bg-beige mt-3">
+                <h3>{{x.uid.username}}</h3>
+          </div></center>
+          {% endif %}
+          {% endfor %}
+<div class="container text-center">
+  <div class="row align-items-start">
+        
+          <div class="col-md-4 mt-5">
+            <button class='btn btn-success' width="100%" data-bs-toggle="modal" data-bs-target="#exampleModal" >Eat Here</button>
+          </div>
+          <div class="col-md-4 mt-5">
+            <button class='btn btn-success' width="100%" data-bs-toggle="modal" data-bs-target="#exampleModal2" >TakeAway</button>
+          </div>
+          <div class="col-md-4 mt-5">
+            <button class='btn btn-success' width="100%"><a href='/delivery' style="text-decoration: none; color:beige">HomeDelivery</a></button>
+          </div>
+        
+    </div>
+</div>
+{% for x in data %}
+<div class="row">
+  <div class="col-md-4 mt-4">
+      <img src="{{x.pid.pimage.url}}" width="100%" alt=""/>
+  </div>
+  <div class="col-md-8 mt-4">
+      <p><strong>Product Name:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.name}}</p>
+      <p><strong>Price:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.price}}</p>
+      {% if x.pid.cat == 1 %}
+      <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Milk Product</p>
+      {% elif x.pid.cat == 2 %}
+      <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Confectionery</p>
+      {% else %}
+      <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Snacks</p>
+      
+      {% endif %}
+      <p><strong>Product Description:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.pdetails}}</p>
+      
+      <p>
+          <strong>QTY:</strong>
+          <!--<a href='/updateqty/0/{{x.id}}'><button class="btn btn-danger">-</button></a>-->
+          <input type="number" value="{{x.qty}}" readonly>
+          <!--<a href='/updateqty/1/{{x.id}}'><button class="btn btn-success">+</button></a>-->
+      </p>
+      
+      <button class="btn btn-danger"><a href="/removep/{{x.id}}" style='text-decoration:none; color:white;'>Remove</a></button>
+  </div>
+</div>
+{% endfor %}
+
+<div class="col-md mt-5">
+    <center><h5 class="bg-danger text-white p-2">Total amount</h5>
+    <p><strong>Total({{n}} items):</strong>&nbsp;Rs.{{total}}</p>
+    <hr>
+    <p><strong>Total Bill Amount:</strong>:</strong>&nbsp;Rs.{{total}}</p>
+    
+</div><!--amount section-->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Alert! order confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <center><h1>Your Order Id:</h1>
+        <h3>{{x.ord_id}}</h3>
+        <p>please confirm order by doing payment</p>
+        <p>please wait for few minutes after payment</p>
+        <p>Collect order from counter when your orderid is displayed.</p></center>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success"><a href='/payment' style="text-decoration: none; color:beige">Make Payment</a></button>
+        <button type="button" class="btn btn-success"><a href='/Cashe' style="text-decoration: none; color:beige">CASH</a></button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Alert! order confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for x in data %}
+        {% if forloop.counter == 1 %}
+        <center><h1>Your Order Id:</h1>
+        <h3>{{x.ord_id}}</h3>
+        <p>please confirm order by doing payment</p>
+        <p>please wait for few minutes after payment</p>
+        <p>Please collect parcel from window counter when your orderid is displayed on Parcel Screen.</p></center>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success"><a href='/payment' style="text-decoration: none; color:beige">Make Payment</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock 'main' %}
+
+{% include 'footer.html' %}

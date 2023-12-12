@@ -1,0 +1,36 @@
+{% include 'header.html' %} 
+
+{% block 'main' %}
+<div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+<script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [{% for orders in ord %} '{% if orders.pid.cat == 1 %}milk products, {% elif orders.pid.cat == 2 %}Confectionery, {% else %}Snacks  {% endif %}', {% endfor %}],
+        datasets: [{
+          label: '# of orders',
+          data: [{% for orders in ord %} {{ orders.qty }}, {% endfor %}],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
+
+
+{% endblock 'main' %}
+
+{% include 'footer.html' %}

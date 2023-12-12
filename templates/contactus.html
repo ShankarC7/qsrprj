@@ -1,0 +1,47 @@
+{% include 'header.html' %} 
+
+{% block 'main' %}
+
+<div class="row mt-5">
+    
+      <div class="col-md-6">
+        <h5 class="bg-danger text-white p-2"><i class="bi bi-info-square-fill"></i>Fill in your details:</h5>
+            <form method="POST" action="/create">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type='text' name='uname' placeholder='sender name' /></td>
+                    </tr>
+                    <tr>
+                        <td>Email id:</td>
+                        <td><input type='email' name='uemail' placeholder='sender mail' /></td>
+                    </tr>
+                    <tr>
+                        <td>mobile no:</td>
+                        <td><input type='number' name='mobile' placeholder='sender mob.no.' /></td>
+                    </tr>
+                    <tr>
+                        <td>Message:</td>
+                        <td><textarea name='msg' rows='5' cols='30'></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align='center'><input type='submit' name='send' value='submit' /></td>
+                    </tr>
+                </table>
+            </form>   
+
+     
+      </div>
+      <div class="col-md-6">
+        <h5 class="bg-danger text-white p-2"><i class="bi bi-geo"></i>Our location:</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30001.22870953155!2d73.75726183476561!3d19.960042100000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb3150ad589f%3A0x7d4fdd83c6d48a60!2sSamrat%20Sweets!5e0!3m2!1sen!2sin!4v1700579641941!5m2!1sen!2sin" width="450" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+  </div>
+   
+
+
+{% endblock 'main' %}
+
+{% include 'footer.html' %}
